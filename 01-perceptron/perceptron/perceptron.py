@@ -1,5 +1,6 @@
 import numpy as np
-from numpy.random.mtrand import RandomState
+
+from numpy.random import RandomState
 from perceptron.classifier import Classifier
 
 
@@ -46,7 +47,7 @@ class Perceptron(Classifier):
         :rtype: Perceptron
         :return: self
         """
-        random_number_generator: RandomState = np.random.RandomState(self.weight_init_seed)
+        random_number_generator: RandomState = RandomState(self.weight_init_seed)
         self.weights = random_number_generator.normal(loc=0.0, scale=0.01, size=1 + X.shape[1])
         self.errors = []
 

@@ -14,11 +14,12 @@ class Perceptron(Classifier):
         passes over the training dataset
     :ivar weight_init_seed:
         random number generator seed for random weight initialization
-    :ivar weigths:
+    :ivar weights:
         1d-array of trained weights
     :ivar errors:
         list of number of misclassifications in each epoch
     """
+    weights: np.ndarray
 
     def __init__(self, learning_rate: float = 0.01, num_epochs: int = 50, weight_init_seed: int = 1) -> None:
         """
@@ -35,6 +36,8 @@ class Perceptron(Classifier):
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
         self.weight_init_seed = weight_init_seed
+        self.errors = []
+        self.weights = None
 
     def train(self, X: np.matrix, Y: np.matrix) -> object:
         """
@@ -49,7 +52,6 @@ class Perceptron(Classifier):
         """
         random_number_generator: RandomState = RandomState(self.weight_init_seed)
         self.weights = random_number_generator.normal(loc=0.0, scale=0.01, size=1 + X.shape[1])
-        self.errors = []
 
         for i in range(self.num_epochs):
             print('Training epoch ' + str(i + 1))

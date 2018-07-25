@@ -38,6 +38,10 @@ class Perceptron(Classifier):
         self.errors = []
         self.weights = None
 
+    def activation(self, X):
+        """Compute linear activation"""
+        return X
+
     def train(self, X: np.matrix, Y: np.matrix) -> object:
         """
         Trains the perceptron
@@ -64,18 +68,6 @@ class Perceptron(Classifier):
 
         return self
 
-    def net_input(self, X: np.matrix) -> np.matrix:
-        """
-        Calculate net input
-
-        :return:
-        :type X: np.matrix[num_samples, num_features]
-        :param X: training set, where num_samples is the number of samples and num_features is the number of features
-        :rtype: np.matrix[num_samples, num_features]
-        :return: the linear combination of the weights with the training set samples
-        """
-        return np.dot(X, self.weights[1:]) + self.weights[0]
-
     def predict(self, X: np.matrix) -> np.ndarray:
         """
         Predicts class labels by applying the unit step activation function
@@ -86,4 +78,4 @@ class Perceptron(Classifier):
         :rtype: np.core.multiarray
         :return: the predicted class labels
         """
-        return np.where(self.net_input(X) >= 0.0, 1, -1)
+        return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)

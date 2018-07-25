@@ -5,7 +5,7 @@ from ml.common.plot.plotter import Plotter
 from ml.perceptron.perceptron import Perceptron
 
 
-class TestStringMethods(unittest.TestCase):
+class PerceptronTest(unittest.TestCase):
 
     def set_up(self):
         return

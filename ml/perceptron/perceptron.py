@@ -1,7 +1,6 @@
 import numpy as np
-
 from numpy.random import RandomState
-from perceptron.classifier import Classifier
+from ml.common.classification.classifier import Classifier
 
 
 class Perceptron(Classifier):

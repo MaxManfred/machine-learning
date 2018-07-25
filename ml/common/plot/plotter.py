@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-from perceptron.classifier import Classifier
+from ml.common.classification.classifier import Classifier
 
 
 class Plotter(object):

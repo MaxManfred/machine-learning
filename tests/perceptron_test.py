@@ -1,15 +1,16 @@
 import unittest
-from perceptron.utils.data_reader import IrisDataReader
-from perceptron.utils.plotter import Plotter
-from perceptron.perceptron import Perceptron
+
+from ml.common.data.data_reader import IrisDataReader
+from ml.common.plot.plotter import Plotter
+from ml.perceptron.perceptron import Perceptron
 
 
 class TestStringMethods(unittest.TestCase):
 
-    def setUp(self):
+    def set_up(self):
         return
 
-    def tearDown(self):
+    def tear_down(self):
         return
 
     def test_perceptron(self):

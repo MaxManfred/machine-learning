@@ -1,6 +1,7 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.colors import ListedColormap
+
 from ml.common.classification.classifier import Classifier
 
 
@@ -11,7 +12,8 @@ class Plotter(object):
         Constructor
         """
 
-    def plot_data_set(self, X: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
+    @staticmethod
+    def plot_data_set(X: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
         plt.scatter(X[:50, 0], X[:50, 1], color='red', marker='o', label='setosa')
         plt.scatter(X[50:100, 0], X[50:100, 1], color='blue', marker='x', label='versicolor')
 
@@ -22,7 +24,8 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution)
         plt.show()
 
-    def plot_learning_curve(self, errors: [int] = None, image_file_path: str = None, resolution: int = 300):
+    @staticmethod
+    def plot_learning_curve(errors: [int] = None, image_file_path: str = None, resolution: int = 300):
         plt.plot(range(1, len(errors) + 1), errors, marker='o')
         plt.xlabel('Epochs')
         plt.ylabel('Number of updates')
@@ -30,7 +33,24 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution)
         plt.show()
 
-    def plot_decision_boundary(self, X, Y, grid_resolution: float = 0.02, classifier: Classifier = None, x_label: str = None,
+    @staticmethod
+    def plot_multiple_learning_curves(curves: [{}] = None, figure_size : tuple = (10, 4), image_file_path: str = None,
+                                      resolution: int = 300):
+        fig, ax = plt.subplots(nrows=1, ncols=len(curves), figsize=figure_size)
+        i: int = 0
+        for curve in curves:
+            ax[i].plot(range(1, curve['cost_length'] + 1), curve['cost_logarithm'], curve['marker'])
+            ax[i].set_xlabel(curve['x_label'])
+            ax[i].set_ylabel(curve['y_label'])
+            ax[i].set_title(curve['title'])
+            i += 1
+
+        plt.savefig(image_file_path, dpi=resolution)
+        plt.show()
+
+
+    @staticmethod
+    def plot_decision_boundary(X, Y, grid_resolution: float = 0.02, classifier: Classifier = None, x_label: str = None,
                                y_label: str = None, legend: str = None, image_file_path: str = None, resolution: int = 300):
         # setup marker generator and color map
         markers = ('s', 'x', 'o', '^', 'v')

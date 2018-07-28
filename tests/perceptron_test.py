@@ -33,5 +33,6 @@ class PerceptronTest(unittest.TestCase):
                                        y_label='petal length [cm]', legend='upper left',
                                        image_file_path='../resources/images/Perceptron-Decision-Boundary.png')
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -52,8 +52,6 @@ class AdalineTest(unittest.TestCase):
         ]
         Plotter.plot_multiple_learning_curves(curves, image_file_path='../resources/images/Adaline-Learning-Curves.png')
 
-
-
         # import matplotlib.pyplot as plt
         #
         #

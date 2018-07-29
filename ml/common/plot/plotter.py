@@ -39,7 +39,7 @@ class Plotter(object):
         fig, ax = plt.subplots(nrows=1, ncols=len(curves), figsize=figure_size)
         i: int = 0
         for curve in curves:
-            ax[i].plot(range(1, curve['cost_length'] + 1), curve['cost_logarithm'], curve['marker'])
+            ax[i].plot(range(1, curve['cost_length'] + 1), curve['cost_logarithm'], marker=curve['marker'])
             ax[i].set_xlabel(curve['x_label'])
             ax[i].set_ylabel(curve['y_label'])
             ax[i].set_title(curve['title'])
@@ -47,7 +47,6 @@ class Plotter(object):
 
         plt.savefig(image_file_path, dpi=resolution)
         plt.show()
-
 
     @staticmethod
     def plot_decision_boundary(X, Y, grid_resolution: float = 0.02, classifier: Classifier = None, x_label: str = None,

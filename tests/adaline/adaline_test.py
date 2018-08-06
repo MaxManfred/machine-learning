@@ -24,7 +24,7 @@ class AdalineTest(unittest.TestCase):
         Plotter.plot_data_set(x, '../../resources/images/Adaline-Training-Set.png')
 
         # train the first  with bigger learning ratio
-        adaline1 = AdalineGD(learning_rate=0.1, num_epochs=30)
+        adaline1 = AdalineGD(learning_rate=0.01, num_epochs=30)
         adaline1.train(x, y)
 
         # train the second adaline model with smaller learning ration
@@ -80,7 +80,7 @@ class AdalineTest(unittest.TestCase):
         Plotter.plot_data_set(x_std, '../../resources/images/Adaline-Standardized-Training-Set.png')
 
         # train adaline on standardized features with a small number of epochs
-        adaline = AdalineGD(learning_rate=0.0001, num_epochs=10)
+        adaline = AdalineGD(learning_rate=0.01, num_epochs=10)
         adaline.train(x_std, y)
 
         # plot learning curve

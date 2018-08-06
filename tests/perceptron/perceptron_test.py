@@ -7,23 +7,21 @@ from ml.perceptron.perceptron import Perceptron
 
 class PerceptronTest(unittest.TestCase):
 
-    def set_up(self):
-        return
+    def setUp(self):
+        # load subset of Iris data
+        iris_data_reader = IrisDataReader('../../resources/iris.data')
+        self.x, self.y = iris_data_reader.get_data()
 
-    def tear_down(self):
+        # plotter data and save it to file
+        Plotter.plot_data_set(self.x, '../../resources/images/Adaline-Training-Set.png')
+
+    def tearDown(self):
         return
 
     def test_perceptron(self):
-        # load subset of Iris data
-        iris_data_reader = IrisDataReader('../../resources/iris.data')
-        X, Y = iris_data_reader.get_data()
-
-        # plotter data and save it to file
-        Plotter.plot_data_set(X, '../../resources/images/Perceptron-Training-Set.png')
-
         # train the perceptron model
         perceptron = Perceptron(learning_rate=0.1, num_epochs=10)
-        perceptron.train(X, Y)
+        perceptron.fit(self.x, self.y)
 
         # plot learning curve
         curve = {
@@ -37,14 +35,13 @@ class PerceptronTest(unittest.TestCase):
         Plotter.plot_learning_curve(curve, '../../resources/images/Perceptron-Learning-Curve.png')
 
         # plot decision boundary
-
         diagram_options = {
             'x_label': 'sepal length [cm]',
             'y_label': 'petal length [cm]',
             'legend': 'upper left'
         }
 
-        Plotter.plot_decision_boundary(X, Y, classifier=perceptron, diagram_options=diagram_options,
+        Plotter.plot_decision_boundary(self.x, self.y, classifier=perceptron, diagram_options=diagram_options,
                                        image_file_path='../../resources/images/Perceptron-Decision-Boundary.png')
 
 

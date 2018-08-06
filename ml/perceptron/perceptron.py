@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.random import RandomState
+
 from ml.common.classification.classifier import Classifier
 
 
@@ -15,7 +16,7 @@ class Perceptron(Classifier):
         random number generator seed for random weight initialization
     :ivar weights:
         1d-array of trained weights
-    :ivar errors:
+    :ivar cost:
         list of number of misclassifications in each epoch
     """
     weights: np.ndarray
@@ -38,29 +39,29 @@ class Perceptron(Classifier):
         self.cost = []
         self.weights = None
 
-    def activation(self, X):
+    def activation(self, x):
         """Compute linear activation"""
-        return X
+        return x
 
-    def train(self, X: np.matrix, Y: np.matrix) -> object:
+    def fit(self, x: np.matrix, y: np.matrix) -> object:
         """
         Trains the perceptron
 
-        :type X: np.matrix[num_samples, num_features]
-        :param X: training set, where num_samples is the number of samples and num_features is the number of features
-        :type Y: np.matrix[num_samples]
-        :param Y: training set labels, where num_samples is the number of samples
+        :type x: np.matrix[num_samples, num_features]
+        :param x: training set, where num_samples is the number of samples and num_features is the number of features
+        :type y: np.matrix[num_samples]
+        :param y: training set labels, where num_samples is the number of samples
         :rtype: Perceptron
         :return: self
         """
         random_number_generator: RandomState = RandomState(self.weight_init_seed)
-        self.weights = random_number_generator.normal(loc=0.0, scale=0.01, size=1 + X.shape[1])
+        self.weights = random_number_generator.normal(loc=0.0, scale=0.01, size=1 + x.shape[1])
 
         for i in range(self.num_epochs):
             print('Training epoch ' + str(i + 1))
 
             errors: int = 0
-            for xi, yi in zip(X, Y):
+            for xi, yi in zip(x, y):
                 update = self.learning_rate * (yi - self.predict(xi))
 
                 self.weights[1:] += update * xi
@@ -71,14 +72,14 @@ class Perceptron(Classifier):
 
         return self
 
-    def predict(self, X: np.matrix) -> np.ndarray:
+    def predict(self, x: np.matrix) -> np.ndarray:
         """
         Predicts class labels by applying the unit step activation function
 
-        :type X: np.matrix[num_test_elements, num_features]
-        :param X: test set, where num_test_elements is the number of elements to test and num_features is the number of
+        :type x: np.matrix[num_test_elements, num_features]
+        :param x: test set, where num_test_elements is the number of elements to test and num_features is the number of
                   features
         :rtype: np.core.multiarray
         :return: the predicted class labels
         """
-        return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)
+        return np.where(self.activation(self.net_input(x)) >= 0.0, 1, -1)

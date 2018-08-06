@@ -35,7 +35,7 @@ class Perceptron(Classifier):
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
         self.weight_init_seed = weight_init_seed
-        self.errors = []
+        self.cost = []
         self.weights = None
 
     def activation(self, X):
@@ -58,13 +58,16 @@ class Perceptron(Classifier):
 
         for i in range(self.num_epochs):
             print('Training epoch ' + str(i + 1))
+
             errors: int = 0
             for xi, yi in zip(X, Y):
                 update = self.learning_rate * (yi - self.predict(xi))
+
                 self.weights[1:] += update * xi
                 self.weights[0] += update
+
                 errors += int(update != 0.0)
-            self.errors.append(errors)
+            self.cost.append(errors)
 
         return self
 

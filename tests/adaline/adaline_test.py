@@ -108,13 +108,13 @@ class AdalineTest(unittest.TestCase):
         Plotter.plot_data_set(x_std, '../../resources/images/AdalineSGD-Standardized-Training-Set.png')
 
         # train adaline on standardized features with a small number of epochs
-        adaline = AdalineSGD(learning_rate=0.01, num_epochs=10)
+        adaline = AdalineSGD(learning_rate=0.01, num_epochs=15)
         adaline.fit(x_std, self.y)
 
         # plot learning curve
         curve = {
             'cost_length': len(adaline.cost),
-            'cost': np.log10(adaline.cost),
+            'cost': adaline.cost,
             'marker': 'o',
             'x_label': 'Epochs',
             'y_label': 'log(Sum-squared-error)',

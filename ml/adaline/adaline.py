@@ -73,24 +73,18 @@ class AdalineSGD(Classifier):
         # Initialize weights to small random numbers
         self._initialize_weights(x.shape[1])
 
+        self.cost = []
         for i in range(self.num_epochs):
             print('Training epoch ' + str(i + 1))
-
-            # Please note that the "activation" method has no effect in the code since it is simply an identity
-            # function.
-            # We could write output = self.net_input(x) directly instead.
-            # The purpose of the activation is more conceptual, i.e., in the case of logistic regression (as we will see
-            # later),
-            # we could change it to a sigmoid function to implement a logistic regression classifier.
 
             if self.shuffle:
                 x, y = self._shuffle(x, y)
 
-            cost = []
+            c = []
             for xi, target in zip(x, y):
-                cost.append(self._update_weights(xi, target))
-                average_cost = sum(cost) / len(y)
-                self.cost.append(average_cost)
+                c.append(self._update_weights(xi, target))
+            average_cost = sum(c) / len(y)
+            self.cost.append(average_cost)
 
         return self
 
@@ -136,6 +130,6 @@ class AdalineSGD(Classifier):
         error = (target - output)
         self.weights[1:] += self.learning_rate * xi.dot(error)
         self.weights[0] += self.learning_rate * error
-        cost = 0.5 * error**2
+        c = 0.5 * error**2
 
-        return cost
+        return c

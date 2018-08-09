@@ -2,7 +2,7 @@ import unittest
 
 from ml.common.data.data_reader import IrisDataReader
 from ml.common.plot.plotter import Plotter
-from ml.perceptron.perceptron import Perceptron
+from ml.perceptron import Perceptron
 
 
 class PerceptronTest(unittest.TestCase):
@@ -23,7 +23,7 @@ class PerceptronTest(unittest.TestCase):
         perceptron = Perceptron(learning_rate=0.1, num_epochs=10)
         perceptron.fit(self.x, self.y)
 
-        # plot learning curve
+        # plot learning
         curve = {
             'cost_length': len(perceptron.cost),
             'cost': perceptron.cost,
@@ -40,7 +40,6 @@ class PerceptronTest(unittest.TestCase):
             'y_label': 'petal length [cm]',
             'legend': 'upper left'
         }
-
         Plotter.plot_decision_boundary(self.x, self.y, classifier=perceptron, diagram_options=diagram_options,
                                        image_file_path='../../resources/images/Perceptron-Decision-Boundary.png')
 

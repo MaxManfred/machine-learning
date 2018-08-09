@@ -36,6 +36,7 @@ class AdalineBGD(Classifier):
             output = self.activation(self.net_input(x))
             errors = (y - output)
 
+            # update weights
             self.weights[1:] += self.learning_rate * x.T.dot(errors)
             self.weights[0] += self.learning_rate * errors.sum()
 

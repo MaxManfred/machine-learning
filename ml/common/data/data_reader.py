@@ -22,11 +22,11 @@ class IrisDataReader(object):
     def get_data(self) -> (np.matrix, np.matrix):
 
         # extract sepal length and petal length
-        X = self.iris_data_frame.iloc[0:100, [0, 2]].values
+        x = self.iris_data_frame.iloc[0:100, [0, 2]].values
 
         # select setosa and versicolor
-        Y = self.iris_data_frame.iloc[0:100, 4].values
-        Y = np.where(Y == 'Iris-setosa', -1, 1)
+        y = self.iris_data_frame.iloc[0:100, 4].values
+        y = np.where(y == 'Iris-setosa', -1, 1)
 
-        return X, Y
+        return x, y
 

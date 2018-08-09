@@ -1,3 +1,5 @@
+import array
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
@@ -61,7 +63,8 @@ class Plotter(object):
     @staticmethod
     def plot_decision_boundary(x: np.matrix, y: np.matrix, classifier: Classifier = None, diagram_options: dict = None,
                                image_file_path: object = None, resolution: object = 300) -> None:
-        grid_resolution: float = diagram_options['grid_resolution'] if diagram_options.get('grid_resolution') is not None \
+        grid_resolution: float = diagram_options['grid_resolution'] if diagram_options.get(
+            'grid_resolution') is not None \
             else 0.02
         x_label: str = diagram_options['x_label']
         y_label: str = diagram_options['y_label']
@@ -75,9 +78,12 @@ class Plotter(object):
         # plot the decision surface
         x1_min, x1_max = x[:, 0].min() - 1, x[:, 0].max() + 1
         x2_min, x2_max = x[:, 1].min() - 1, x[:, 1].max() + 1
+
         xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, grid_resolution), np.arange(x2_min, x2_max, grid_resolution))
+
         z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
         z = z.reshape(xx1.shape)
+
         plt.contourf(xx1, xx2, z, alpha=0.3, cmap=color_map)
         plt.xlim(xx1.min(), xx1.max())
         plt.ylim(xx2.min(), xx2.max())
@@ -93,6 +99,14 @@ class Plotter(object):
                 label=cl,
                 edgecolor='black'
             )
+
+        # highlight test samples
+        draw_test_samples: array[int] = diagram_options['draw_test_samples'] if diagram_options.get('draw_test_samples') is not None else False
+
+        if draw_test_samples:
+            x_test, y_test = x[draw_test_samples, :], y[draw_test_samples]
+            plt.scatter(x_test[:, 0], x_test[:, 1], c='', edgecolor='black', alpha=1.0, linewidth=1, marker='o', s=100,
+                        label='test set')
 
         plt.xlabel(x_label)
         plt.ylabel(y_label)

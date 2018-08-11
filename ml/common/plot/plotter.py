@@ -117,3 +117,22 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution)
 
         plt.show()
+
+    @staticmethod
+    def draw_regularizatiion_curves(curve: {} = None, params: np.ndarray = None , weights: np.ndarray = None,
+                                    image_file_path: str = None, resolution: int = 300):
+        plt.plot(params, weights[:, 0], label='petal length')
+        plt.plot(params, weights[:, 1], linestyle='--', label='petal width')
+
+        plt.xlabel(curve['x_label'])
+        plt.ylabel(curve['y_label'])
+        plt.title(curve['title'])
+        plt.legend(loc=curve['legend'])
+
+        plt.xscale('log')
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()

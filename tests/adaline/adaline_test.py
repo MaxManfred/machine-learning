@@ -15,7 +15,7 @@ class AdalineTest(unittest.TestCase):
         self.x, self.y = iris_data_reader.get_data()
 
         # plotter data and save it to file
-        Plotter.plot_data_set(self.x, '../../resources/images/Adaline-Training-Set.png')
+        Plotter.plot_iris_data_set(self.x, '../../resources/images/Adaline-Training-Set.png')
 
     def tearDown(self):
         return
@@ -73,7 +73,7 @@ class AdalineTest(unittest.TestCase):
         x_std[:, 1] = (self.x[:, 1] - self.x[:, 1].mean()) / self.x[:, 1].std()
 
         # plotter data and save it to file
-        Plotter.plot_data_set(x_std, '../../resources/images/AdalineBGD-Standardized-Training-Set.png')
+        Plotter.plot_iris_data_set(x_std, '../../resources/images/AdalineBGD-Standardized-Training-Set.png')
 
         # train adaline on standardized features with a small number of epochs
         adaline = AdalineBGD(learning_rate=0.01, num_epochs=10)
@@ -105,7 +105,7 @@ class AdalineTest(unittest.TestCase):
         x_std[:, 1] = (self.x[:, 1] - self.x[:, 1].mean()) / self.x[:, 1].std()
 
         # plotter data and save it to file
-        Plotter.plot_data_set(x_std, '../../resources/images/AdalineSGD-Standardized-Training-Set.png')
+        Plotter.plot_iris_data_set(x_std, '../../resources/images/AdalineSGD-Standardized-Training-Set.png')
 
         # train adaline on standardized features with a small number of epochs
         adaline = AdalineSGD(learning_rate=0.01, num_epochs=15)

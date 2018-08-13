@@ -15,13 +15,30 @@ class Plotter(object):
         """
 
     @staticmethod
-    def plot_data_set(x: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
+    def plot_iris_data_set(x: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
         plt.scatter(x[:50, 0], x[:50, 1], color='red', marker='o', label='setosa')
         plt.scatter(x[50:100, 0], x[50:100, 1], color='blue', marker='x', label='versicolor')
 
         plt.xlabel('sepal length [cm]')
         plt.ylabel('petal length [cm]')
         plt.legend(loc='upper left')
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()
+
+    @staticmethod
+    def plot_svm_nonlinear_data_set(x: np.matrix, y: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
+        plt.scatter(x[y == 1, 0], x[y == 1, 1], c='b', marker='x', label='1')
+        plt.scatter(x[y == -1, 0], x[y == -1, 1], c='r', marker='s', label='-1')
+
+        plt.xlim([-3, 3])
+        plt.ylim([-3, 3])
+        plt.xlabel('feature 1')
+        plt.ylabel('feature 2')
+        plt.legend(loc='best')
 
         plt.tight_layout()
 
@@ -101,7 +118,8 @@ class Plotter(object):
             )
 
         # highlight test samples
-        draw_test_samples: array[int] = diagram_options['draw_test_samples'] if diagram_options.get('draw_test_samples') is not None else False
+        draw_test_samples: array[int] = diagram_options['draw_test_samples'] if diagram_options.get(
+            'draw_test_samples') is not None else False
 
         if draw_test_samples:
             x_test, y_test = x[draw_test_samples, :], y[draw_test_samples]
@@ -119,7 +137,7 @@ class Plotter(object):
         plt.show()
 
     @staticmethod
-    def draw_regularizatiion_curves(curve: {} = None, params: np.ndarray = None , weights: np.ndarray = None,
+    def plot_regularizatiion_curves(curve: {} = None, params: np.ndarray = None, weights: np.ndarray = None,
                                     image_file_path: str = None, resolution: int = 300):
         plt.plot(params, weights[:, 0], label='petal length')
         plt.plot(params, weights[:, 1], linestyle='--', label='petal width')

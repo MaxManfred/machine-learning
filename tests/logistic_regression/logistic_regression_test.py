@@ -29,7 +29,7 @@ class LogisticRegressionTest(unittest.TestCase):
         print('Class labels:', np.unique(self.y))
 
         # plotter data and save it to file
-        Plotter.plot_data_set(self.x, '../../resources/images/LogisticRegressionBGD-Training-Set.png')
+        Plotter.plot_iris_data_set(self.x, '../../resources/images/LogisticRegressionBGD-Training-Set.png')
 
     def tearDown(self):
         return

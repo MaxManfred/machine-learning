@@ -10,6 +10,12 @@ from tests.common.scikit_learn_test import ScikitLearnTest
 
 class ScikitLearnSVMTest(ScikitLearnTest):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.switcher = {
+            'test_scikit_learn_svm_nonlinear': cls.load_svm_nonlinear_data_set
+        }
+
     def test_scikit_learn_svm(self):
         # Train the SVM.
         # Most algorithms in scikit-learn already support multiclass classification via the One-versus-Rest (OvR) method
@@ -28,6 +34,32 @@ class ScikitLearnSVMTest(ScikitLearnTest):
         svm.fit(self.x_train, self.y_train)
 
         self.predict_and_evaluate(svm, '../../resources/images/SVM-ScikitLearn-Classifier-Decision-Boundary.png')
+
+    def test_scikit_learn_svm_nonlinear(self):
+        svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
+        svm.fit(self.x_train, self.y_train)
+
+        diagram_options = {
+            'x_label': 'feature 1',
+            'y_label': 'feature 2',
+            'legend': 'best'
+        }
+        Plotter.plot_decision_boundary(self.x_train, self.y_train, svm, diagram_options,
+                                       image_file_path='../../resources/images/SVM-ScikitLearn-NonLinear-Decision-Boundary.png')
+
+    def load_svm_nonlinear_data_set(self):
+        # Load a non linearly separable dataset
+        np.random.seed(1)
+        x_xor = np.random.randn(200, 2)
+        y_xor = np.logical_xor(x_xor[:, 0] > 0, x_xor[:, 1] > 0)
+        y_xor = np.where(y_xor, 1, -1)
+
+        # plotter data and save it to file
+        Plotter.plot_svm_nonlinear_data_set(x_xor, y_xor,
+                                            '../../resources/images/SVM-ScikitLearn-NonLinear-Training-Set.png')
+
+        self.x_train = x_xor
+        self.y_train = y_xor
 
     def predict_and_evaluate(self, svm, image_file_path: str = None):
         # Run predictions and count the number of misclassified examples

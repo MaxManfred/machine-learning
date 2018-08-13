@@ -47,7 +47,7 @@ class ScikitLearnLogisticRegressionTest(ScikitLearnTest):
             'legend': 'upper left'
         }
 
-        Plotter.draw_regularizatiion_curves(curve, params, weights,
+        Plotter.plot_regularizatiion_curves(curve, params, weights,
                                             image_file_path='../../resources/images/LogisticRegression-ScikitLearn-Regularization-Curves.png')
 
     def predict_and_evaluate(self, perceptron, image_file_path: str = None):

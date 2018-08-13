@@ -36,6 +36,9 @@ class ScikitLearnSVMTest(ScikitLearnTest):
         self.predict_and_evaluate(svm, '../../resources/images/SVM-ScikitLearn-Classifier-Decision-Boundary.png')
 
     def test_scikit_learn_svm_nonlinear(self):
+        # The γ parameter, which we set to gamma=0.1, can be understood as a cut-off parameter for the Gaussian sphere.
+        # If we increase the value for γ , we increase the influence or reach of the training samples, which leads to a
+        # tighter and bumpier decision boundary.
         svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
         svm.fit(self.x_train, self.y_train)
 
@@ -46,6 +49,16 @@ class ScikitLearnSVMTest(ScikitLearnTest):
         }
         Plotter.plot_decision_boundary(self.x_train, self.y_train, svm, diagram_options,
                                        image_file_path='../../resources/images/SVM-ScikitLearn-NonLinear-Decision-Boundary.png')
+
+    def test_scikit_learn_svm_nonlinear_iris(self):
+        svm = SVC(kernel='rbf', random_state=1, gamma=0.2, C=1.0)
+        svm.fit(self.x_train, self.y_train)
+
+        self.predict_and_evaluate(svm, '../../resources/images/SVM-ScikitLearn-LowGamma-Decision-Boundary.png')
+
+        svm = SVC(kernel='rbf', random_state=1, gamma=100.0, C=1.0)
+        svm.fit(self.x_train, self.y_train)
+        self.predict_and_evaluate(svm, '../../resources/images/SVM-ScikitLearn-HighGamma-Decision-Boundary.png')
 
     def load_svm_nonlinear_data_set(self):
         # Load a non linearly separable dataset

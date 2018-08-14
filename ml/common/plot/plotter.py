@@ -30,7 +30,8 @@ class Plotter(object):
         plt.show()
 
     @staticmethod
-    def plot_svm_nonlinear_data_set(x: np.matrix, y: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
+    def plot_svm_nonlinear_data_set(x: np.matrix, y: np.matrix, image_file_path: str = None,
+                                    resolution: int = 300) -> None:
         plt.scatter(x[y == 1, 0], x[y == 1, 1], c='b', marker='x', label='1')
         plt.scatter(x[y == -1, 0], x[y == -1, 1], c='r', marker='s', label='-1')
 
@@ -148,6 +149,36 @@ class Plotter(object):
         plt.legend(loc=curve['legend'])
 
         plt.xscale('log')
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()
+
+    @staticmethod
+    def plot_impurity_criteria(x_range: [], entropy: [], scaled_entropy: [], gini: [], misclassification_error: [],
+                               image_file_path: str = None, resolution: int = 300):
+        iterator = zip(
+            [entropy, scaled_entropy, gini, misclassification_error],
+            ['I(H)', '1/2 * I(H)', 'I(G)', 'I(E)'],
+            ['-', '-', '--', '-.'],
+            ['black', 'lightgray', 'red', 'green', 'cyan']
+        )
+
+        fig = plt.figure()
+        ax = plt.subplot(1, 1, 1)
+
+        for i, lab, ls, c, in iterator:
+            ax.plot(x_range, i, label=lab, linestyle=ls, lw=2, color=c)
+
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=5, fancybox=True, shadow=False)
+
+        ax.axhline(y=0.5, linewidth=1, color='k', linestyle='--')
+        ax.axhline(y=1.0, linewidth=1, color='k', linestyle='--')
+        plt.ylim([0, 1.1])
+        plt.xlabel('p(i=1)')
+        plt.ylabel('Impurity Index')
 
         plt.tight_layout()
 

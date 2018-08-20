@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 from ml.common.plot.plotter import Plotter
+from test.common.filesystem_utils import FilesystemUtils
 from test.common.scikit_learn_test import ScikitLearnTest
 
 
@@ -16,7 +17,8 @@ class ScikitLearnKNNTest(ScikitLearnTest):
         knn.fit(self.x_train, self.y_train)
 
         self.predict_and_evaluate(knn,
-                                  image_file_path='../../resources/images/KNN-ScikitLearn-Decision-Boundary.png')
+                                  image_file_path=FilesystemUtils.get_test_resources_plot_file_name(
+                                      'knn/KNN-ScikitLearn-Decision-Boundary.png'))
 
     def predict_and_evaluate(self, knn: KNeighborsClassifier, image_file_path: str = None):
         # Run predictions and count the number of misclassified examples

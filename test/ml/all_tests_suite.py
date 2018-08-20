@@ -3,6 +3,8 @@ import unittest
 from unittest import makeSuite
 
 from test.ml.classification.adaline.adaline_test import AdalineTest
+from test.ml.classification.decision_tree.scikit_learn_decision_tree_test import ScikitLearnDecisionTreeTest
+from test.ml.classification.knn.scikit_learn_knn_test import ScikitLearnKNNTest
 from test.ml.classification.logistic_regression.logistic_regression_test import LogisticRegressionTest
 from test.ml.classification.logistic_regression.scikit_learn_logistic_regression_test import \
     ScikitLearnLogisticRegressionTest
@@ -16,6 +18,10 @@ def suite():
 
     # classification tests
     test_suite.addTest(makeSuite(AdalineTest))
+
+    test_suite.addTest(makeSuite(ScikitLearnDecisionTreeTest))
+
+    test_suite.addTest(makeSuite(ScikitLearnKNNTest))
 
     test_suite.addTest(makeSuite(LogisticRegressionTest))
     test_suite.addTest(makeSuite(ScikitLearnLogisticRegressionTest))

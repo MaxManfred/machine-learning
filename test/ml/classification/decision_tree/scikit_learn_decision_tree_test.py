@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 
 from ml.common.plot import Plotter
+from test.common.filesystem_utils import FilesystemUtils
 from test.common.scikit_learn_test import ScikitLearnTest
 
 
@@ -37,7 +38,8 @@ class ScikitLearnDecisionTreeTest(ScikitLearnTest):
 
         Plotter.plot_impurity_criteria(x_range, entropy=ent, scaled_entropy=sc_ent, gini=gn,
                                        misclassification_error=err,
-                                       image_file_path='../../resources/images/DecisionTree-ScikitLearn-Impurity-Criteria.png')
+                                       image_file_path=FilesystemUtils.get_test_resources_plot_file_name(
+                                           'decision_tree/DecisionTree-ScikitLearn-Impurity-Criteria.png'))
 
     def test_scikit_learn_decision_tree(self):
         # Train the decision tree.
@@ -46,20 +48,23 @@ class ScikitLearnDecisionTreeTest(ScikitLearnTest):
         tree.fit(self.x_train, self.y_train)
 
         self.predict_and_evaluate(tree,
-                                  image_file_path='../../resources/images/DecisionTree-ScikitLearn-Decision-Boundary.png')
+                                  image_file_path=FilesystemUtils.get_test_resources_plot_file_name(
+                                      'decision_tree/DecisionTree-ScikitLearn-Decision-Boundary.png'))
 
         # save the tree as a digram
         dot_data = export_graphviz(tree, filled=True, rounded=True, class_names=['Setosa', 'Versicolor', 'Virginica'],
                                    feature_names=['petal length', 'petal width'], out_file=None)
         graph = graph_from_dot_data(dot_data)
-        graph.write_png('../../resources/images/DecisionTree-ScikitLearn-Tree-Diagram.png')
+        graph.write_png(FilesystemUtils.get_test_resources_plot_file_name(
+            'decision_tree/DecisionTree-ScikitLearn-Tree-Diagram.png'))
 
     def test_scikit_learn_random_forest(self):
         forest = RandomForestClassifier(criterion='gini', n_estimators=25, random_state=1, n_jobs=2)
         forest.fit(self.x_train, self.y_train)
 
         self.predict_and_evaluate(forest,
-                                  image_file_path='../../resources/images/RandomForest-ScikitLearn-Decision-Boundary.png')
+                                  image_file_path=FilesystemUtils.get_test_resources_plot_file_name(
+                                      'decision_tree/RandomForest-ScikitLearn-Decision-Boundary.png'))
 
     def predict_and_evaluate(self, decision_tree: DecisionTreeClassifier, image_file_path: str = None):
         # Run predictions and count the number of misclassified examples

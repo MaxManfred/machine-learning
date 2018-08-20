@@ -1,1 +1,1 @@
-from ml.common.data.data_reader import IrisDataReader
+from ml.common.data.iris_data_reader import IrisDataReader

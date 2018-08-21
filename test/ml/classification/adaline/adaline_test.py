@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from ml.adaline.adaline import AdalineBGD, AdalineSGD
+from ml.classification.adaline.adaline import AdalineBGD, AdalineSGD
 from ml.common.data.iris_data_reader import IrisDataReader
 from ml.common.plot.plotter import Plotter
 from test.common.filesystem_utils import FilesystemUtils

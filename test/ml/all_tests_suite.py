@@ -11,6 +11,7 @@ from test.ml.classification.logistic_regression.scikit_learn_logistic_regression
 from test.ml.classification.perceptron.perceptron_test import PerceptronTest
 from test.ml.classification.perceptron.scikit_learn_perceptron_test import ScikitLearnPerceptronTest
 from test.ml.classification.svm.scikit_learn_svm_test import ScikitLearnSVMTest
+from test.ml.data_preparation.missing_data_test import MissingDataTest
 
 
 def suite():
@@ -30,6 +31,9 @@ def suite():
     test_suite.addTest(makeSuite(ScikitLearnPerceptronTest))
 
     test_suite.addTest(makeSuite(ScikitLearnSVMTest))
+
+    # data preparation tests
+    test_suite.addTest(makeSuite(MissingDataTest))
 
     return test_suite
 

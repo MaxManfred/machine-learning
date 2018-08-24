@@ -5,7 +5,7 @@ import numpy as np
 from ml.classification.adaline.adaline import AdalineBGD, AdalineSGD
 from ml.common.data.iris_data_reader import IrisDataReader
 from ml.common.plot.plotter import Plotter
-from test.common.filesystem_utils import FilesystemUtils
+from test.ml.common.filesystem_utils import FilesystemUtils
 
 
 class AdalineTest(unittest.TestCase):

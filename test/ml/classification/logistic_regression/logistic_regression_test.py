@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 from ml.classification.logistic_regression.logistic_regression import LogisticRegressionBGD
 from ml.common.plot.plotter import Plotter
-from test.common.filesystem_utils import FilesystemUtils
+from test.ml.common.filesystem_utils import FilesystemUtils
 
 
 class LogisticRegressionTest(unittest.TestCase):

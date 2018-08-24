@@ -3,7 +3,7 @@ import unittest
 from ml.common.data.iris_data_reader import IrisDataReader
 from ml.common.plot.plotter import Plotter
 from ml.classification.perceptron.perceptron import Perceptron
-from test.common.filesystem_utils import FilesystemUtils
+from test.ml.common.filesystem_utils import FilesystemUtils
 
 
 class PerceptronTest(unittest.TestCase):

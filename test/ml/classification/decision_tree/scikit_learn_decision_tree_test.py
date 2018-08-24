@@ -6,8 +6,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 
 from ml.common.plot import Plotter
-from test.common.filesystem_utils import FilesystemUtils
-from test.common.scikit_learn_test import ScikitLearnTest
+from test.ml.common.filesystem_utils import FilesystemUtils
+from test.ml.common.scikit_learn_test import ScikitLearnTest
 
 
 class ScikitLearnDecisionTreeTest(ScikitLearnTest):

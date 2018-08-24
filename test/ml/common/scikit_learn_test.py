@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 from ml.common.plot.plotter import Plotter
-from test.common.filesystem_utils import FilesystemUtils
+from test.ml.common.filesystem_utils import FilesystemUtils
 
 
 class ScikitLearnTest(unittest.TestCase):

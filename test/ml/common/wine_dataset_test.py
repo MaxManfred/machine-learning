@@ -32,3 +32,6 @@ class WineDatasetTest(ScikitLearnTest):
         # split training and test set
         # separate class labels from features
         self.x, self.y = df.iloc[:, 1:].values, df.iloc[:, 0].values
+
+        # save column names for later usage
+        self.df_columns = df.columns

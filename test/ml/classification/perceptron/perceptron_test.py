@@ -10,7 +10,7 @@ class PerceptronTest(unittest.TestCase):
 
     def setUp(self):
         # load subset of Iris data
-        iris_data_reader = IrisDataReader(FilesystemUtils.get_resources_data_file_name('iris.data'))
+        iris_data_reader = IrisDataReader(FilesystemUtils.get_resources_data_file_name('iris/iris.data'))
         self.x, self.y = iris_data_reader.get_data()
 
         # plotter data and save it to file

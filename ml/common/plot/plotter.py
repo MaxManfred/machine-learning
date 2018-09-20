@@ -185,3 +185,30 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution)
 
         plt.show()
+
+    @staticmethod
+    def plot_variable_feature_weights(weights: [], params: [], df_columns: [], image_file_path: str = None,
+                                      resolution: int = 300):
+        ax = plt.subplot(111)
+        colors = [
+            'blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black', 'pink', 'lightgreen', 'lightblue', 'gray',
+            'indigo', 'orange'
+        ]
+
+        for column, color in zip(range(weights.shape[1]), colors):
+            plt.plot(params, weights[:, column], label=df_columns[column + 1], color=color)
+
+        plt.axhline(0, color='black', linestyle='--', linewidth=2)
+
+        plt.xlim([10**(-5), 10**5])
+
+        plt.ylabel('weight coefficient')
+        plt.xlabel('C')
+
+        plt.xscale('log')
+        plt.legend(loc='upper left')
+        ax.legend(loc='upper center', bbox_to_anchor=(1.3, 1.02), ncol=1, fancybox=True)
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()

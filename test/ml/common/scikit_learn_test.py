@@ -44,8 +44,8 @@ class ScikitLearnTest(unittest.TestCase):
         self.y_test = y_test
 
     def setUp(self):
-        # Execute custom loading data function specified in child test class, otherwise switch to the default loading iris
-        # data function
+        # Execute custom loading data function specified in child test class, otherwise switch to the default loading
+        # iris data function
         func = self.switcher.get(self._testMethodName, self.load_iris_dataset)
         if 'load_iris_dataset'.__eq__(func.__name__):
             func()

@@ -13,6 +13,9 @@ from test.ml.classification.perceptron.scikit_learn_perceptron_test import Sciki
 from test.ml.classification.svm.scikit_learn_svm_test import ScikitLearnSVMTest
 from test.ml.data_preparation.categorical_data_test import CategoricalDataTest
 from test.ml.data_preparation.missing_data_test import MissingDataTest
+from test.ml.data_preparation.normalization_and_standardization_test import NormalizationStandardizationTest
+from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
+from test.ml.regularization.regularization_test import RegularizationTest
 
 
 def suite():
@@ -35,8 +38,10 @@ def suite():
 
     # data preparation tests
     test_suite.addTest(makeSuite(MissingDataTest))
-
     test_suite.addTest(makeSuite(CategoricalDataTest))
+    test_suite.addTest(makeSuite(TrainTestSplittingTest))
+    test_suite.addTest(makeSuite(NormalizationStandardizationTest))
+    test_suite.addTest(makeSuite(RegularizationTest))
 
     return test_suite
 

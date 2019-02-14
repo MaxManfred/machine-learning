@@ -229,3 +229,17 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
 
         plt.show()
+
+    @staticmethod
+    def plot_feature_importance(feature_number: int, descending_importance_list: [], descending_names_list: [],
+                                image_file_path: str = None,
+                                resolution: int = 300):
+        plt.title('Feature Importance')
+        plt.bar(range(feature_number), descending_importance_list, align='center')
+        plt.xticks(range(feature_number), descending_names_list, rotation=90)
+        plt.xlim([-1, feature_number])
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()

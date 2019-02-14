@@ -12,6 +12,7 @@ from test.ml.classification.perceptron.perceptron_test import PerceptronTest
 from test.ml.classification.perceptron.scikit_learn_perceptron_test import ScikitLearnPerceptronTest
 from test.ml.classification.svm.scikit_learn_svm_test import ScikitLearnSVMTest
 from test.ml.data_preparation.categorical_data_test import CategoricalDataTest
+from test.ml.data_preparation.feature_importance_test import FeatureImportanceTest
 from test.ml.data_preparation.missing_data_test import MissingDataTest
 from test.ml.data_preparation.normalization_and_standardization_test import NormalizationStandardizationTest
 from test.ml.data_preparation.sequential_feature_selection_test import SequentialFeatureSelectionTest
@@ -44,6 +45,7 @@ def suite():
     test_suite.addTest(makeSuite(NormalizationStandardizationTest))
     test_suite.addTest(makeSuite(RegularizationTest))
     test_suite.addTest(makeSuite(SequentialFeatureSelectionTest))
+    test_suite.addTest(makeSuite(FeatureImportanceTest))
 
     return test_suite
 

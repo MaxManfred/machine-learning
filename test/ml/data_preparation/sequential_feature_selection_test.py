@@ -28,5 +28,12 @@ class SequentialFeatureSelectionTest(WineDatasetTest):
 
         Plotter.plot_accuracy_by_feature_number(
             sbs.subsets_, sbs.scores_,
-            FilesystemUtils.get_test_resources_plot_file_name('sequential_feature_selection/AccuracyByFeatureNumber.png')
+            FilesystemUtils.get_test_resources_plot_file_name(
+                'sequential_feature_selection/AccuracyByFeatureNumber.png')
         )
+
+        # for each subset of features, print column names, so to see how the elimination process worked
+        print('Progressive selection explained')
+        for feature_subset in sbs.subsets_:
+            indices = list(feature_subset)
+            print(self.df_columns[1:][indices])

@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 
-class CategoricalData:
+class CategoricalData(object):
 
     def __init__(self):
         self.csv_data: str = None

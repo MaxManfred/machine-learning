@@ -200,7 +200,7 @@ class Plotter(object):
 
         plt.axhline(0, color='black', linestyle='--', linewidth=2)
 
-        plt.xlim([10**(-5), 10**5])
+        plt.xlim([10 ** (-5), 10 ** 5])
 
         plt.ylabel('weight coefficient')
         plt.xlabel('C')
@@ -208,6 +208,23 @@ class Plotter(object):
         plt.xscale('log')
         plt.legend(loc='upper left')
         ax.legend(loc='upper center', bbox_to_anchor=(1.3, 1.02), ncol=1, fancybox=True)
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()
+
+    @staticmethod
+    def plot_accuracy_by_feature_number(feature_subsets: list, scores: list, image_file_path: str = None,
+                                        resolution: int = 300):
+        # plotting performance of feature subsets
+        feature_number_list = [len(subset) for subset in feature_subsets]
+
+        plt.plot(feature_number_list, scores, marker='o')
+        plt.ylim([0.7, 1.02])
+        plt.ylabel('Accuracy')
+        plt.xlabel('Number of features')
+        plt.grid()
+        plt.tight_layout()
 
         plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
 

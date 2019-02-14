@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.preprocessing import Imputer
 
 
-class MissingData:
+class MissingData(object):
 
     def __init__(self):
         self.csv_data: str = None

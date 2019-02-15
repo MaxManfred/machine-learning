@@ -16,7 +16,7 @@ setup(
     name='python-machine-learning',
     version=__version__,
     python_requires='>=3.6.0',
-    description='Example gallery',
+    description='Machine Learning Example gallery',
     author='Massimo Manfredino',
     author_email='massimo.manfredino@gmail.it',
     packages=find_packages(),

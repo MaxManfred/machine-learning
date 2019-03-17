@@ -71,7 +71,7 @@ class IMDBDataReader(object):
             shutil.rmtree(os.path.join(RESOURCES_DATA_DIR, 'imdb/aclImdb'))
             print('\nDone!')
 
-        return self.load_data()
+        return self._load_data()
 
     def report_hook(self, count, block_size, total_size):
         """
@@ -97,7 +97,7 @@ class IMDBDataReader(object):
         )
         sys.stdout.flush()
 
-    def load_data(self):
+    def _load_data(self):
         data_frame = pd.read_csv(os.path.join(RESOURCES_DATA_DIR, 'imdb/movie_data.csv'), encoding='utf-8')
         print('Loaded dataset has shape {}'.format(data_frame.shape))
         print(data_frame.head(10))

@@ -3,4 +3,5 @@ matplotlib
 pandas
 pydotplus
 pyprind
+nltk
 numpy

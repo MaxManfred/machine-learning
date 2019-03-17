@@ -19,7 +19,6 @@ from ml.common.data.data_reader import DataReader
 
 
 class WDBCDataReader(DataReader):
-
     DATASET_RELATIVE_FILE_PATH: str = 'wdbc/wdbc.csv'
 
     DATASET_NAMES_RELATIVE_FILE_PATH: str = 'wdbc/wdbc.names'
@@ -60,6 +59,9 @@ class WDBCDataReader(DataReader):
         le = LabelEncoder()
         y = wdbc_data_frame.iloc[:, 1].values
         wdbc_data_frame.iloc[:, 1] = pd.Series(le.fit_transform(y))
+
+        # After encoding the class labels (diagnosis) in an array y, the malignant tumors are now represented as class 1
+        # and the benign tumors are represented as class 0, respectively.
 
         print(' ')
         print('Found classes {} on column at index 1'.format(le.classes_))

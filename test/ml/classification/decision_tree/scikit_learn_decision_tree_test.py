@@ -21,12 +21,12 @@ class ScikitLearnDecisionTreeTest(ScikitLearnTest):
     def test_draw_impurity_criteria_types(self):
         # For a visual comparison of the three different impurity criteria (Entropy, Gini, Misclassification Error),
         # let us plot the impurity indices for the probability range [0, 1] for class 1.
-        # Note that we will also add a scaled version of the entropy (entropy / 2) to observe that the Gini impurity is an
-        # intermediate measure between entropy and the classification error.
+        # Note that we will also add a scaled version of the entropy (entropy / 2) to observe that the Gini impurity is
+        # an intermediate measure between entropy and the classification error.
 
         x_range = np.arange(start=0.0, stop=1.0, step=0.01, dtype=float)
 
-        # compute entropy and scaled antropy
+        # compute entropy and scaled entropy
         ent = [self.entropy(p) if p != 0 else None for p in x_range]
         sc_ent = [e * 0.5 if e else None for e in ent]
 

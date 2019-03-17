@@ -1,17 +1,16 @@
 import os
 import shutil
-import sys
 import tarfile
-import time
 
 import numpy as np
 import pandas as pd
 import pyprind
 
 from definitions import RESOURCES_DATA_DIR
+from ml.common.data.data_reader import DataReader
 
 
-class IMDBDataReader(object):
+class IMDBDataReader(DataReader):
 
     def get_data(self):
         # check csv file is existing
@@ -23,7 +22,7 @@ class IMDBDataReader(object):
             if not os.path.isfile(target):
                 print('Downloading dataset...')
                 import urllib.request
-                urllib.request.urlretrieve(source, target, self.report_hook)
+                urllib.request.urlretrieve(source, target, self._download_progress_monitor)
                 print('\nDone!')
             else:
                 print('Dataset has already been downloaded')
@@ -71,38 +70,7 @@ class IMDBDataReader(object):
             shutil.rmtree(os.path.join(RESOURCES_DATA_DIR, 'imdb/aclImdb'))
             print('\nDone!')
 
-        return self._load_data()
-
-    def report_hook(self, count, block_size, total_size):
-        """
-        Progress monitor
-
-        :param count:
-        :param block_size:
-        :param total_size:
-        :return:
-        """
-        global start_time
-        if count == 0:
-            start_time = time.time()
-            return
-
-        duration = time.time() - start_time
-        progress_size = int(count * block_size)
-        speed = progress_size / (1024. ** 2 * duration)
-        percent = count * block_size * 100. / total_size
-
-        sys.stdout.write(
-            '\r%d%% | %d MB | %.2f MB/s | %d sec elapsed' % (percent, progress_size / (1024. ** 2), speed, duration)
-        )
-        sys.stdout.flush()
-
-    def _load_data(self):
-        data_frame = pd.read_csv(os.path.join(RESOURCES_DATA_DIR, 'imdb/movie_data.csv'), encoding='utf-8')
-        print('Loaded dataset has shape {}'.format(data_frame.shape))
-        print(data_frame.head(10))
-
-        return data_frame
+        return self._load_data(relative_file_path='imdb/movie_data.csv')
 
 
 if __name__ == "__main__":

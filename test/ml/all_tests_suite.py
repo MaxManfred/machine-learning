@@ -17,6 +17,9 @@ from test.ml.data_preparation.missing_data_test import MissingDataTest
 from test.ml.data_preparation.normalization_and_standardization_test import NormalizationStandardizationTest
 from test.ml.data_preparation.sequential_feature_selection_test import SequentialFeatureSelectionTest
 from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
+from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
+from test.ml.model_performance.scikit_learn_learning_curve_test import ScikitLearnLeaningCurvesTest
+from test.ml.pipeline.scikit_learn_pipeline_test import ScikitLearnPipelineTest
 from test.ml.regularization.regularization_test import RegularizationTest
 
 
@@ -46,6 +49,13 @@ def suite():
     test_suite.addTest(makeSuite(RegularizationTest))
     test_suite.addTest(makeSuite(SequentialFeatureSelectionTest))
     test_suite.addTest(makeSuite(FeatureImportanceTest))
+
+    # model performance tests
+    test_suite.addTest(makeSuite(ScikitLearnKFoldCVTest))
+    test_suite.addTest(makeSuite(ScikitLearnLeaningCurvesTest))
+
+    # pipeline tests
+    test_suite.addTest(makeSuite(ScikitLearnPipelineTest))
 
     return test_suite
 

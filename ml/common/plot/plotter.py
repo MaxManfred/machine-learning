@@ -243,3 +243,35 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
 
         plt.show()
+
+    @staticmethod
+    def plot_performance_curves(train_sizes: np.array, train_scores: np.array, test_scores: np.array,
+                             image_file_path: str = None, resolution: int = 300):
+        # We simply calculated the average accuracies from the returned cross-validated training and test scores for
+        # the different sizes of the training set, which we plotted using Matplotlib's plot function.
+        # Furthermore, we added the standard deviation of the average accuracy to the plot using the fill_between
+        # function to indicate the variance of the estimate.
+
+        train_mean = np.mean(train_scores, axis=1)
+        train_std = np.std(train_scores, axis=1)
+        test_mean = np.mean(test_scores, axis=1)
+        test_std = np.std(test_scores, axis=1)
+
+        plt.title('Learning curves')
+        plt.plot(train_sizes, train_mean, color='blue', marker='o', markersize=5, label='training accuracy')
+        plt.fill_between(train_sizes, train_mean + train_std, train_mean - train_std, alpha=0.15, color='blue')
+
+        plt.plot(train_sizes, test_mean, color='green', linestyle='--', marker='s', markersize=5,
+                 label='validation accuracy')
+        plt.fill_between(train_sizes, test_mean + test_std, test_mean - test_std, alpha=0.15, color='green')
+
+        plt.grid()
+
+        plt.xlabel('Number of training samples')
+        plt.ylabel('Accuracy')
+        plt.legend(loc='lower right')
+        plt.ylim([0.8, 1.0])
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()

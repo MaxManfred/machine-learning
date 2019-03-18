@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split, learning_curve
+from sklearn.model_selection import train_test_split, learning_curve, validation_curve
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -11,15 +11,16 @@ from test.ml.common.filesystem_utils import FilesystemUtils
 from test.ml.common.scikit_learn_test import ScikitLearnTest
 
 
-class ScikitLearnLeaningCurvesTest(ScikitLearnTest):
+class ScikitLearnPerformanceCurvesTest(ScikitLearnTest):
 
     @classmethod
     def setUpClass(cls):
         cls.switcher = {
-            'test_scikit_learn_learning_curve_on_wdbc_pipeline': cls.load_wdbc_data_set
+            'test_scikit_learn_learning_curves_on_wdbc_pipeline': cls.load_wdbc_data_set,
+            'test_scikit_learn_validation_curves_on_wdbc_pipeline': cls.load_wdbc_data_set
         }
 
-    def test_scikit_learn_learning_curve_on_wdbc_pipeline(self):
+    def test_scikit_learn_learning_curves_on_wdbc_pipeline(self):
         # create a pipeline to test
         wdbc_pipeline = make_pipeline(
             StandardScaler(),
@@ -27,7 +28,7 @@ class ScikitLearnLeaningCurvesTest(ScikitLearnTest):
             LogisticRegression(solver='lbfgs', random_state=42)
         )
 
-        # prepare learning curve
+        # prepare learning curves
 
         # Via the train_sizes parameter in the learning_curve function, we can control the absolute or relative number
         # of training samples that are used to generate the learning curves.
@@ -38,6 +39,7 @@ class ScikitLearnLeaningCurvesTest(ScikitLearnTest):
         # Finally, we plot the diagram using a helper function.
 
         num_folds = 10
+
         train_sizes, train_scores, test_scores = learning_curve(
             estimator=wdbc_pipeline,
             X=self.x_train, y=self.y_train,
@@ -50,6 +52,38 @@ class ScikitLearnLeaningCurvesTest(ScikitLearnTest):
             'model_performance/ModelPerformance-ScikitLearn-LearningCurves.png'
         )
         Plotter.plot_performance_curves(train_sizes, train_scores, test_scores, image_file_path=image_file_path)
+
+    def test_scikit_learn_validation_curves_on_wdbc_pipeline(self):
+        # create a pipeline to test
+        wdbc_pipeline = make_pipeline(
+            StandardScaler(),
+            PCA(n_components=2),
+            LogisticRegression(solver='lbfgs', random_state=42)
+        )
+
+        # prepare validation curves
+
+        # Validation curves are a useful tool for improving the performance of a model by addressing issues such as
+        # overfitting or underfitting.
+        # Validation curves are related to learning curves, but instead of plotting the training and test accuracies as
+        # functions of the sample size, we vary the values of the model parameters, for example, the
+        # inverse regularization parameter C in logistic regression.
+
+        num_folds = 10
+        param_range = np.array([0.001, 0.01, 0.1, 1.0, 10.0, 100.0])
+
+        train_scores, test_scores = validation_curve(
+            estimator=wdbc_pipeline,
+            X=self.x_train, y=self.y_train,
+            param_name='logisticregression__C', param_range=param_range,
+            cv=num_folds,
+            n_jobs=-1
+        )
+
+        image_file_path = FilesystemUtils.get_test_resources_plot_file_name(
+            'model_performance/ModelPerformance-ScikitLearn-ValidationCurves.png'
+        )
+        Plotter.plot_validation_curves(param_range, train_scores, test_scores, image_file_path=image_file_path)
 
     def load_wdbc_data_set(self):
         data_reader = WDBCDataReader()

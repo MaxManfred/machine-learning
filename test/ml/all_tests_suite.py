@@ -18,7 +18,7 @@ from test.ml.data_preparation.normalization_and_standardization_test import Norm
 from test.ml.data_preparation.sequential_feature_selection_test import SequentialFeatureSelectionTest
 from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
 from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
-from test.ml.model_performance.scikit_learn_learning_curve_test import ScikitLearnLeaningCurvesTest
+from test.ml.model_performance.scikit_learn_performance_curves_test import ScikitLearnPerformanceCurvesTest
 from test.ml.pipeline.scikit_learn_pipeline_test import ScikitLearnPipelineTest
 from test.ml.regularization.regularization_test import RegularizationTest
 
@@ -52,7 +52,7 @@ def suite():
 
     # model performance tests
     test_suite.addTest(makeSuite(ScikitLearnKFoldCVTest))
-    test_suite.addTest(makeSuite(ScikitLearnLeaningCurvesTest))
+    test_suite.addTest(makeSuite(ScikitLearnPerformanceCurvesTest))
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))

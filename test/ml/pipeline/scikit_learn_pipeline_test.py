@@ -17,8 +17,6 @@ class ScikitLearnPipelineTest(ScikitLearnTest):
         }
 
     def test_scikit_learn_wdbc_pipeline(self):
-        # print(self.x_train[1:10])
-
         # Learning algorithms require input features on the same scale for optimal performance.
         # Thus, we need to standardize the columns in the Breast Cancer Wisconsin dataset before we can feed them to a
         # linear classifier, such as logistic regression.

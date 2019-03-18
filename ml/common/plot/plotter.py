@@ -246,7 +246,7 @@ class Plotter(object):
 
     @staticmethod
     def plot_performance_curves(train_sizes: np.array, train_scores: np.array, test_scores: np.array,
-                             image_file_path: str = None, resolution: int = 300):
+                                image_file_path: str = None, resolution: int = 300):
         # We simply calculated the average accuracies from the returned cross-validated training and test scores for
         # the different sizes of the training set, which we plotted using Matplotlib's plot function.
         # Furthermore, we added the standard deviation of the average accuracy to the plot using the fill_between

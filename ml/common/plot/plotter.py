@@ -312,3 +312,22 @@ class Plotter(object):
         plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
 
         plt.show()
+
+    @staticmethod
+    def plot_confusion_matrix(confusion_matrix: np.array, image_file_path: str = None, resolution: int = 300):
+        # We can map this information onto the confusion matrix illustration using Matplotlib matshow function
+
+        plt.title('Confusion matrix')
+        fig, ax = plt.subplots(figsize=(2.5, 2.5))
+        ax.matshow(confusion_matrix, cmap=plt.cm.Blues, alpha=0.3)
+
+        for i in range(confusion_matrix.shape[0]):
+            for j in range(confusion_matrix.shape[1]):
+                ax.text(x=j, y=i, s=confusion_matrix[i, j], va='center', ha='center')
+
+        plt.xlabel('predicted label')
+        plt.ylabel('true label')
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()

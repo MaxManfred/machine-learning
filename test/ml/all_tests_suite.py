@@ -19,6 +19,7 @@ from test.ml.data_preparation.sequential_feature_selection_test import Sequentia
 from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
 from test.ml.model_performance.scikit_learn_grid_search_test import ScikitLearnGridSearchTest
 from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
+from test.ml.model_performance.scikit_learn_nested_cv_test import ScikitLearnKNestedCVTest
 from test.ml.model_performance.scikit_learn_performance_curves_test import ScikitLearnPerformanceCurvesTest
 from test.ml.pipeline.scikit_learn_pipeline_test import ScikitLearnPipelineTest
 from test.ml.regularization.regularization_test import RegularizationTest
@@ -53,6 +54,7 @@ def suite():
 
     # model performance tests
     test_suite.addTest(makeSuite(ScikitLearnKFoldCVTest))
+    test_suite.addTest(makeSuite(ScikitLearnKNestedCVTest))
     test_suite.addTest(makeSuite(ScikitLearnPerformanceCurvesTest))
     test_suite.addTest(makeSuite(ScikitLearnGridSearchTest))
 

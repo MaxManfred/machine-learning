@@ -18,6 +18,7 @@ from test.ml.data_preparation.normalization_and_standardization_test import Norm
 from test.ml.data_preparation.sequential_feature_selection_test import SequentialFeatureSelectionTest
 from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
 from test.ml.model_performance.scikit_learn_confusion_matrix_test import ScikitLearnConfusionMatrixTest
+from test.ml.model_performance.scikit_learn_custom_scorer_test import ScikitLearnCustomScorerTest
 from test.ml.model_performance.scikit_learn_grid_search_test import ScikitLearnGridSearchTest
 from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
 from test.ml.model_performance.scikit_learn_nested_cv_test import ScikitLearnKNestedCVTest
@@ -59,6 +60,7 @@ def suite():
     test_suite.addTest(makeSuite(ScikitLearnPerformanceCurvesTest))
     test_suite.addTest(makeSuite(ScikitLearnGridSearchTest))
     test_suite.addTest(makeSuite(ScikitLearnConfusionMatrixTest))
+    test_suite.addTest(makeSuite(ScikitLearnCustomScorerTest))
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))

@@ -3,6 +3,8 @@ import array
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
+from numpy import interp
+from sklearn.metrics import auc
 
 from ml.common.classification.classifier import Classifier
 
@@ -327,6 +329,53 @@ class Plotter(object):
 
         plt.xlabel('predicted label')
         plt.ylabel('true label')
+
+        plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
+
+        plt.show()
+
+    @staticmethod
+    def plot_roc_auc(false_positive_rates: np.array, true_positive_rates: np.array, roc_auc_values: np.array,
+                     image_file_path: str = None, resolution: int = 300):
+        fig = plt.figure(figsize=(7, 5))
+        plt.title('ROC AUC')
+
+        # used to compute mean ROC and AUC
+        tpr_mean = 0.0
+        evenly_spaced_fpr = np.linspace(0, 1, 100)
+
+        for i in range(0, len(false_positive_rates)):
+            fpr = false_positive_rates[i]
+            tpr = true_positive_rates[i]
+            auc_value = roc_auc_values[i]
+            # plot current ROC curve (for the current cv fold)
+            plt.plot(fpr, tpr, label='ROC fold {:,} (area = {:.2f})'.format(i + 1, auc_value))
+
+            # update values for mean ROC and AUC
+            tpr_mean += interp(evenly_spaced_fpr, fpr, tpr)
+            tpr_mean[0] = 0.0
+
+        # normalize values for mean ROC and AUC
+        tpr_mean /= len(false_positive_rates)
+        tpr_mean[-1] = 1.0
+
+        # compute mean AUC
+        auc_mean = auc(evenly_spaced_fpr, tpr_mean)
+
+        # plot mean ROC curve
+        plt.plot(evenly_spaced_fpr, tpr_mean, 'k--', label='mean ROC (area = {:.2f})'.format(auc_mean), lw=2)
+
+        # plot random guessing curve (45 degrees)
+        plt.plot([0, 1], [0, 1], linestyle='--', color=(0.6, 0.6, 0.6), label='random guessing')
+
+        # plot perfect performance curve)
+        plt.plot([0, 0, 1], [0, 1, 1], linestyle=':', color='black', label='perfect performance')
+
+        plt.xlim([-0.05, 1.05])
+        plt.ylim([-0.05, 1.05])
+        plt.xlabel('false positive rate')
+        plt.ylabel('true positive rate')
+        plt.legend(loc="lower right")
 
         plt.savefig(image_file_path, dpi=resolution, bbox_inches='tight')
 

@@ -23,6 +23,7 @@ from test.ml.model_performance.scikit_learn_grid_search_test import ScikitLearnG
 from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
 from test.ml.model_performance.scikit_learn_nested_cv_test import ScikitLearnKNestedCVTest
 from test.ml.model_performance.scikit_learn_performance_curves_test import ScikitLearnPerformanceCurvesTest
+from test.ml.model_performance.scikit_learn_roc_auc_test import ScikitLearnROCAUCTest
 from test.ml.pipeline.scikit_learn_pipeline_test import ScikitLearnPipelineTest
 from test.ml.regularization.regularization_test import RegularizationTest
 
@@ -61,6 +62,7 @@ def suite():
     test_suite.addTest(makeSuite(ScikitLearnGridSearchTest))
     test_suite.addTest(makeSuite(ScikitLearnConfusionMatrixTest))
     test_suite.addTest(makeSuite(ScikitLearnCustomScorerTest))
+    test_suite.addTest(makeSuite(ScikitLearnROCAUCTest))
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))

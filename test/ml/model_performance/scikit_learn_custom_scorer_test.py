@@ -58,7 +58,7 @@ class ScikitLearnCustomScorerTest(ScikitLearnTest):
         gs = gs.fit(self.x_train, self.y_train)
 
         # display results
-        print('Best {}-fold cv accuracy score: {}'.format(num_folds, gs.best_score_))
+        print('Best {}-fold cv f1 score: {}'.format(num_folds, gs.best_score_))
         print('Best {}-fold cv hyper-parameters: {}'.format(num_folds, gs.best_params_))
 
     def load_wdbc_data_set(self):

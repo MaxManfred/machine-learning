@@ -21,6 +21,7 @@ from test.ml.model_performance.scikit_learn_confusion_matrix_test import ScikitL
 from test.ml.model_performance.scikit_learn_custom_scorer_test import ScikitLearnCustomScorerTest
 from test.ml.model_performance.scikit_learn_grid_search_test import ScikitLearnGridSearchTest
 from test.ml.model_performance.scikit_learn_k_fold_cv_test import ScikitLearnKFoldCVTest
+from test.ml.model_performance.scikit_learn_macro_micro_averaging_test import ScikitLearnMacroMicroAveragingTest
 from test.ml.model_performance.scikit_learn_nested_cv_test import ScikitLearnKNestedCVTest
 from test.ml.model_performance.scikit_learn_performance_curves_test import ScikitLearnPerformanceCurvesTest
 from test.ml.model_performance.scikit_learn_roc_auc_test import ScikitLearnROCAUCTest
@@ -63,6 +64,7 @@ def suite():
     test_suite.addTest(makeSuite(ScikitLearnConfusionMatrixTest))
     test_suite.addTest(makeSuite(ScikitLearnCustomScorerTest))
     test_suite.addTest(makeSuite(ScikitLearnROCAUCTest))
+    test_suite.addTest(makeSuite(ScikitLearnMacroMicroAveragingTest))
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))

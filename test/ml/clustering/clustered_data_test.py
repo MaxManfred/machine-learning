@@ -1,5 +1,6 @@
 import unittest
 
+import numpy as np
 from sklearn.cluster import KMeans
 
 from ml.clustering.clustered_data_generator import ClusteredDataGenerator
@@ -20,6 +21,7 @@ class CategoricalDataTest(unittest.TestCase):
     def test_plot_sample_clustered_data(self):
         Plotter.plot_scattered_data(
             self.x,
+            title='Sample clustered data',
             image_file_path=FilesystemUtils.get_test_resources_plot_file_name('clustering/SampleClusteredData.png')
         )
 
@@ -27,13 +29,13 @@ class CategoricalDataTest(unittest.TestCase):
         km = KMeans(
             # number of clusters
             n_clusters=3,
-            # initialization mathod
+            # initialization method
             init='random',
             # number of different experiments run
             n_init=10,
             # maximum number of iteration
             max_iter=300,
-            # change within cluster inimum threshold: below it, the training process is stopped
+            # change within cluster minimum threshold: below it, the training process is stopped
             tol=1e-04,
             # initialization seed
             random_state=42
@@ -41,6 +43,33 @@ class CategoricalDataTest(unittest.TestCase):
 
         predictions = km.fit_predict(self.x)
 
+        self.plot_predictions(predictions, km.cluster_centers_,
+                              title='Sample k-means clusters with random initialization',
+                              diagram_file_name='SampleKMeansClustersWithRandomInitialization.png')
+
+    def test_k_means_with_k_means_plus_plus_initialization(self):
+        km = KMeans(
+            # number of clusters
+            n_clusters=3,
+            # initialization method
+            init='k-means++',
+            # number of different experiments run
+            n_init=10,
+            # maximum number of iteration
+            max_iter=300,
+            # change within cluster minimum threshold: below it, the training process is stopped
+            tol=1e-04,
+            # initialization seed
+            random_state=42
+        )
+
+        predictions = km.fit_predict(self.x)
+
+        self.plot_predictions(predictions, km.cluster_centers_,
+                              title='Sample k-means clusters with k-means++ initialization',
+                              diagram_file_name='SampleKMeansClustersWithKMeans++Initialization.png')
+
+    def plot_predictions(self, predictions: np.matrix, centroids: np.matrix, title: str, diagram_file_name: str):
         data = [
             {
                 'x': self.x[predictions == 0, :],
@@ -69,7 +98,7 @@ class CategoricalDataTest(unittest.TestCase):
         ]
 
         centroids = {
-            'x': km.cluster_centers_,
+            'x': centroids,
             'color': 'red',
             'marker': '*',
             'marker_size': 250,
@@ -78,6 +107,6 @@ class CategoricalDataTest(unittest.TestCase):
         }
 
         Plotter.plot_multiple_scattered_data(
-            data, centroids,
-            image_file_path=FilesystemUtils.get_test_resources_plot_file_name('clustering/SampleKMeansClusters.png')
+            data, centroids, title,
+            image_file_path=FilesystemUtils.get_test_resources_plot_file_name('clustering/' + diagram_file_name)
         )

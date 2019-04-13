@@ -18,9 +18,12 @@ class Plotter(object):
 
     @staticmethod
     def plot_scattered_data(data: np.matrix, color: str = 'white', marker: str = 'o', marker_size: int = 50,
-                            edge_color: str = 'black', image_file_path: str = None, resolution: int = 300) -> None:
+                            edge_color: str = 'black', title: str = '', image_file_path: str = None, resolution: int = 300) -> None:
         plt.scatter(data[:, 0], data[:, 1], c=color, marker=marker, edgecolor=edge_color, s=marker_size)
+
         plt.grid()
+
+        plt.title(title)
 
         plt.tight_layout()
 
@@ -29,7 +32,7 @@ class Plotter(object):
         plt.show()
 
     @staticmethod
-    def plot_multiple_scattered_data(data: [], centroids: {}, image_file_path: str = None,
+    def plot_multiple_scattered_data(data: [], centroids: {}, title: str, image_file_path: str = None,
                                      resolution: int = 300) -> None:
         # data is a dictionary list
         for d in data:
@@ -42,6 +45,8 @@ class Plotter(object):
         plt.legend(scatterpoints=1)
 
         plt.grid()
+
+        plt.title(title)
 
         plt.tight_layout()
 

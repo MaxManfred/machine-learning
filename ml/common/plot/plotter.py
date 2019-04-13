@@ -17,6 +17,39 @@ class Plotter(object):
         """
 
     @staticmethod
+    def plot_scattered_data(data: np.matrix, color: str = 'white', marker: str = 'o', marker_size: int = 50,
+                            edge_color: str = 'black', image_file_path: str = None, resolution: int = 300) -> None:
+        plt.scatter(data[:, 0], data[:, 1], c=color, marker=marker, edgecolor=edge_color, s=marker_size)
+        plt.grid()
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()
+
+    @staticmethod
+    def plot_multiple_scattered_data(data: [], centroids: {}, image_file_path: str = None,
+                                     resolution: int = 300) -> None:
+        # data is a dictionary list
+        for d in data:
+            plt.scatter(d['x'][:, 0], d['x'][:, 1], c=d['color'], marker=d['marker'], edgecolor=d['edge_color'],
+                        s=d['marker_size'], label=d['label'])
+
+        plt.scatter(centroids['x'][:, 0], centroids['x'][:, 1], c=centroids['color'], marker=centroids['marker'],
+                    edgecolor=centroids['edge_color'], s=centroids['marker_size'], label=centroids['label'])
+
+        plt.legend(scatterpoints=1)
+
+        plt.grid()
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()
+
+    @staticmethod
     def plot_iris_data_set(x: np.matrix, image_file_path: str = None, resolution: int = 300) -> None:
         plt.scatter(x[:50, 0], x[:50, 1], color='red', marker='o', label='setosa')
         plt.scatter(x[50:100, 0], x[50:100, 1], color='blue', marker='x', label='versicolor')

@@ -11,6 +11,8 @@ from test.ml.classification.logistic_regression.scikit_learn_logistic_regression
 from test.ml.classification.perceptron.perceptron_test import PerceptronTest
 from test.ml.classification.perceptron.scikit_learn_perceptron_test import ScikitLearnPerceptronTest
 from test.ml.classification.svm.scikit_learn_svm_test import ScikitLearnSVMTest
+from test.ml.clustering.clustered_data_test import ClusteredDataTest
+from test.ml.clustering.clustering_quality_test import ClusteringQualityTest
 from test.ml.data_preparation.categorical_data_test import CategoricalDataTest
 from test.ml.data_preparation.feature_importance_test import FeatureImportanceTest
 from test.ml.data_preparation.missing_data_test import MissingDataTest
@@ -68,6 +70,10 @@ def suite():
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))
+
+    # clustering analysis tests
+    test_suite.addTest(makeSuite(ClusteredDataTest))
+    test_suite.addTest(makeSuite(ClusteringQualityTest))
 
     return test_suite
 

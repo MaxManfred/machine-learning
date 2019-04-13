@@ -17,6 +17,21 @@ class Plotter(object):
         """
 
     @staticmethod
+    def plot_data(data: np.matrix, color: str = 'blue', marker: str = 'o', title: str = '',
+                  x_label: str = '', y_label: str = '', image_file_path: str = None, resolution: int = 300) -> None:
+        plt.plot(data[:, 0], data[:, 1], c=color, marker=marker)
+
+        plt.title(title)
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+
+        plt.tight_layout()
+
+        plt.savefig(image_file_path, dpi=resolution)
+
+        plt.show()
+
+    @staticmethod
     def plot_scattered_data(data: np.matrix, color: str = 'white', marker: str = 'o', marker_size: int = 50,
                             edge_color: str = 'black', title: str = '', image_file_path: str = None, resolution: int = 300) -> None:
         plt.scatter(data[:, 0], data[:, 1], c=color, marker=marker, edgecolor=edge_color, s=marker_size)

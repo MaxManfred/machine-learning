@@ -19,6 +19,7 @@ from test.ml.data_preparation.missing_data_test import MissingDataTest
 from test.ml.data_preparation.normalization_and_standardization_test import NormalizationStandardizationTest
 from test.ml.data_preparation.sequential_feature_selection_test import SequentialFeatureSelectionTest
 from test.ml.data_preparation.train_test_set_splitting_test import TrainTestSplittingTest
+from test.ml.model_performance.scikit_learn_class_imbalance_test import ScikitLearnClassImbalanceTest
 from test.ml.model_performance.scikit_learn_confusion_matrix_test import ScikitLearnConfusionMatrixTest
 from test.ml.model_performance.scikit_learn_custom_scorer_test import ScikitLearnCustomScorerTest
 from test.ml.model_performance.scikit_learn_grid_search_test import ScikitLearnGridSearchTest
@@ -67,6 +68,7 @@ def suite():
     test_suite.addTest(makeSuite(ScikitLearnCustomScorerTest))
     test_suite.addTest(makeSuite(ScikitLearnROCAUCTest))
     test_suite.addTest(makeSuite(ScikitLearnMacroMicroAveragingTest))
+    test_suite.addTest(makeSuite(ScikitLearnClassImbalanceTest))
 
     # pipeline tests
     test_suite.addTest(makeSuite(ScikitLearnPipelineTest))
